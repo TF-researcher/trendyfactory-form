@@ -5,27 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>團體服推薦問卷｜衣潮工廠</title>
   <style>
-    body { font-family:'Arial','Microsoft JhengHei',sans-serif; line-height:1.6; margin:0; padding:20px; background:#f4f4f4; color:#333; }
-    .container { max-width:700px; margin:20px auto; background:#fff; padding:30px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
-    h1,h2 { text-align:center; color:#333; }
-    fieldset { border:none; margin-bottom:25px; padding:15px; background:#f9f9f9; border-left:4px solid #007bff; border-radius:4px; }
-    legend { font-weight:bold; margin-bottom:10px; }
-    .tip { font-size:13px; color:#666; margin-top:-10px; margin-bottom:10px; }
-    label { display:block; margin-bottom:8px; cursor:pointer; }
-    input[type="radio"] { margin-right:8px; }
-    .quiz-button, .submit-button {
-      display:block; width:100%; padding:12px; font-size:18px; color:#fff;
-      border:none; border-radius:5px; cursor:pointer; transition:background-color .3s ease; margin-top:20px;
+    body {
+      font-family:'Arial','Microsoft JhengHei',sans-serif;
+      line-height:1.6;
+      margin:0;
+      padding:20px;
+      background:#f4f4f4;
+      color:#333;
     }
-    .quiz-button { background:#28a745; }
-    .quiz-button:hover { background:#218838; }
-    .submit-button { background:#007bff; }
-    .submit-button:hover { background:#0056b3; }
-    #results { display:none; margin-top:30px; padding:20px; background:#e9ecef; border:1px dashed #007bff; border-radius:8px; }
-    #results h3 { margin-top:0; color:#0056b3; }
-    .footer { margin-top:40px; padding-top:20px; border-top:1px solid #ddd; text-align:center; font-size:14px; color:#555; }
-    .footer a { color:#007bff; text-decoration:none; }
-    .footer a:hover { text-decoration:underline; }
+    .container {
+      max-width:700px;
+      margin:20px auto;
+      background:#fff;
+      padding:30px;
+      border-radius:8px;
+      box-shadow:0 0 10px rgba(0,0,0,0.1);
+    }
+    h1,h2 {
+      text-align:center;
+      color:#333;
+    }
+    fieldset {
+      border:none;
+      margin-bottom:25px;
+      padding:15px;
+      background:#f9f9f9;
+      border-left:4px solid #007bff;
+      border-radius:4px;
+    }
+    legend {
+      font-weight:bold;
+      margin-bottom:10px;
+    }
+    .tip {
+      font-size:13px;
+      color:#666;
+      margin-top:-10px;
+      margin-bottom:10px;
+    }
+    label {
+      display:block;
+      margin-bottom:8px;
+      cursor:pointer;
+    }
+    input[type="radio"] {
+      margin-right:8px;
+    }
+    .quiz-button, .copy-button {
+      display:block;
+      width:100%;
+      padding:12px;
+      font-size:18px;
+      color:#fff;
+      text-align: center;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+      transition:background-color .3s ease;
+      margin-top:20px;
+      text-decoration: none;
+    }
+    .quiz-button {
+      background:#007bff;
+    }
+    .quiz-button:hover {
+      background:#0056b3;
+    }
+    .copy-button {
+      background:#007bff;
+    }
+    .copy-button:hover {
+      background:#0056b3;
+    }
+    .line-link {
+      background:#28a745;
+      color:#fff;
+      display:block;
+      width:100%;
+      padding:12px;
+      font-size:18px;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+      text-align:center;
+      margin-top:20px;
+      text-decoration: none;
+    }
+    .line-link:hover {
+      background:#218838;
+    }
+    #results {
+      display:none;
+      margin-top:30px;
+      padding:20px;
+      background:#e9ecef;
+      border-radius:8px;
+      border:1px dashed #007bff;
+    }
+    #results h3 {
+      margin-top:0;
+      color:#0056b3;
+    }
+    .footer {
+      margin-top:40px;
+      padding-top:20px;
+      border-top:1px solid #ddd;
+      text-align:center;
+      font-size:14px;
+      color:#555;
+    }
+    .footer a {
+      color:#007bff;
+      text-decoration:none;
+    }
+    .footer a:hover {
+      text-decoration:underline;
+    }
   </style>
 </head>
 <body>
@@ -33,15 +128,13 @@
     <h1>團體服客製化推薦問卷</h1>
     <p>請依照您的需求與偏好填寫以下問題，我們將提供初步的方案建議。</p>
     <form id="recommendationForm"></form>
-    <button id="showRecommendationBtn" class="quiz-button" type="button">看推薦方案</button>
+    <button id="showRecommendationBtn" class="quiz-button" type="button">查看推薦方案</button>
 
     <div id="results">
       <h3>初步推薦方案：</h3>
       <div id="recommendationText"></div>
-      <button id="copyBtn" class="quiz-button" type="button">📋 複製建議內容</button>
-      <p id="copyStatus" style="text-align:center; font-size:14px; color:green; display:none;">✅ 已複製建議內容</p>
-      <p>這是根據您填答結果的初步建議，報價與設計仍需進一步溝通。</p>
-      <p><a href="https://lin.ee/k3pmRmV" class="quiz-button" target="_blank">→ 立即與 LINE 客服聯繫</a></p>
+      <button id="copyBtn" class="copy-button" type="button">複製推薦內容</button>
+      <a href="https://lin.ee/k3pmRmV" class="line-link" target="_blank">立即與 LINE 客服聯繫</a>
     </div>
 
     <div class="footer">
@@ -50,7 +143,7 @@
       <p>電話：07-3509503</p>
       <p>門市時間：週一至週五 11:00-19:00（假日休息）</p>
       <p>地址：高雄市三民區九如二路681號</p>
-      <p><a href="https://lin.ee/k3pmRmV" target="_blank">LINE 聯繫</a> | <a href="https://www.trendyfactory.com.tw" target="_blank">官網</a></p>
+      <p><a href="https://www.trendyfactory.com.tw" target="_blank">衣潮工廠官網</a></p>
     </div>
   </div>
 
@@ -84,10 +177,11 @@
         name: 'q_quantity',
         title: '3. 預計訂購的數量大概是多少？',
         options: [
-          {value:'low', text:'A. 少量 (20-50 件)'},
-          {value:'medium', text:'B. 中量 (51-200 件)'},
-          {value:'high', text:'C. 大量 (200 件以上)'},
-          {value:'unknown', text:'D. 不確定'}
+          {value:'low', text:'A. 少量 (20件以下)'},
+          {value:'small', text:'B. 小型團體 (20-50件)'},
+          {value:'medium', text:'C. 中型團體 (100-200件)'},
+          {value:'large', text:'D. 大量團體 (300件以上)'},
+          {value:'unknown', text:'F. 不確定'}
         ]
       },
       {
@@ -106,10 +200,11 @@
         name: 'q_budget',
         title: '5. 每件預算範圍？',
         options: [
-          {value:'low', text:'A. 經濟實惠（300 元以下）'},
-          {value:'medium', text:'B. 中等預算（300-600 元）'},
-          {value:'high', text:'C. 預算較高（600 元以上）'},
-          {value:'unknown', text:'D. 不確定'}
+          {value:'low', text:'A. 經濟實惠（200 元以下）'},
+          {value:'mid', text:'B. 中等預算（200-400元）'},
+          {value:'high', text:'C. 預算較高（400-600元）'},
+          {value:'premium', text:'D. 商務需求（600 元以上）'},
+          {value:'unknown', text:'F. 不確定'}
         ]
       }
     ];
@@ -129,55 +224,76 @@
       });
     }
 
-    function getRecommendation(answers) {
-      if (answers.q_purpose === 'sporty' && answers.q_material === 'wicking') {
-        return { scheme: '方案 A：運動活力風', description: '適合高強度運動，快乾透氣', details: ['排汗T恤/背心', '高機能布料', '排汗印刷'] };
-      } else if (answers.q_purpose === 'business' && answers.q_material === 'stiff' && answers.q_budget === 'high') {
-        return { scheme: '方案 C：商務專業風', description: '提升企業形象', details: ['Polo/襯衫', 'CVC混紡', '精緻刺繡'] };
-      } else if (answers.q_budget === 'low') {
-        return { scheme: '方案 D：預算友善方案', description: '控制成本，簡約實用', details: ['基本款Tee/Polo', '單色網版印刷'] };
-      } else if (answers.q_quantity === 'low' && answers.q_design === 'photo') {
-        return { scheme: '方案 E：直噴/數位轉印方案', description: '少量複雜彩圖', details: ['直噴印刷', '數位轉印'] };
-      } else {
-        return { scheme: '方案 F：專人諮詢', description: '需求特殊，將有專人聯繫', details: ['請留下聯絡資訊，我們會盡速回覆'] };
+    function generateRecommendation(answers) {
+      const results = [];
+      if (answers.q_purpose === 'sporty' || answers.q_material === 'wicking') {
+        results.push("建議服飾：排汗T恤或背心，適合戶外與運動活動。");
+        results.push("建議材質：吸濕排汗布，透氣快乾，適合運動。");
       }
+      if (answers.q_material === 'cotton' || answers.q_purpose === 'casual') {
+        results.push("建議服飾：棉質T恤、帽T，適合日常穿著。");
+        results.push("建議材質：100%純棉或混紡棉，親膚柔軟。");
+      }
+      if (answers.q_material === 'stiff' || answers.q_purpose === 'business') {
+        results.push("建議服飾：Polo衫、襯衫，正式感較高。");
+        results.push("建議材質：CVC混紡棉，較挺、不易皺。");
+      }
+      if (answers.q_material === 'durable' || answers.q_purpose === 'work') {
+        results.push("建議服飾：耐磨工作服、功能型服飾。");
+        results.push("建議材質：機能工作布或耐磨布，建議使用刺繡或特殊油墨印刷。");
+      }
+      if (answers.q_quantity === 'low') {
+        results.push("少量建議使用無需開版之數位轉印或直噴印刷。");
+      } else {
+        results.push("數量充足可使用網版印刷或電腦刺繡。");
+      }
+      if (answers.q_design === 'photo') {
+        results.push("建議製作方式：四色印刷或高精度轉印，適合色彩豐富圖案。");
+      } else if (answers.q_design === 'simple' || answers.q_design === 'complex') {
+        results.push("建議製作方式：網版印刷或數位轉印。");
+      } else if (answers.q_design === 'embroidery') {
+        results.push("建議製作方式：電腦刺繡，適合呈現質感Logo。");
+      }
+      if (answers.q_budget === 'low') {
+        results.push("建議款式以基本T恤為主，控制在200元以下。");
+      } else if (answers.q_budget === 'mid') {
+        results.push("可選擇較舒適材質與多樣化印刷搭配。");
+      } else if (answers.q_budget === 'high' || answers.q_budget === 'premium') {
+        results.push("可使用高品質印刷或刺繡工藝，提升整體質感。");
+      }
+      results.push("以上建議為初步分析，實際報價與設計仍需進一步溝通。");
+      return results.join('<br>');
     }
 
     function recommend() {
       const answers = {};
-      let allAnswered = true;
+      let complete = true;
       questions.forEach(q => {
         const sel = document.querySelector(`input[name="${q.name}"]:checked`);
         if (sel) answers[q.name] = sel.value;
-        else allAnswered = false;
+        else complete = false;
       });
-      if (!allAnswered) {
+      if (!complete) {
         alert('請完成所有題目');
         return;
       }
-
-      const rec = getRecommendation(answers);
-      if (answers.q_design === 'embroidery') rec.details.unshift('建議工藝：電腦刺繡');
-
-      window.currentRecommendation = rec;
-
-      document.getElementById('recommendationText').innerHTML =
-        `<p><strong>${rec.scheme}</strong></p><p>${rec.description}</p><ul>${rec.details.map(d => `<li>${d}</li>`).join('')}</ul>`;
+      const result = generateRecommendation(answers);
+      document.getElementById('recommendationText').innerHTML = result;
       document.getElementById('results').style.display = 'block';
       document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copyRecommendation() {
+      const text = document.getElementById('recommendationText').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert('推薦內容已複製到剪貼簿！');
+      });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       renderQuestions();
       document.getElementById('showRecommendationBtn').addEventListener('click', recommend);
-      document.getElementById('copyBtn').addEventListener('click', () => {
-        const content = document.getElementById('recommendationText').innerText;
-        navigator.clipboard.writeText(content).then(() => {
-          const status = document.getElementById('copyStatus');
-          status.style.display = 'block';
-          setTimeout(() => status.style.display = 'none', 2000);
-        });
-      });
+      document.getElementById('copyBtn').addEventListener('click', copyRecommendation);
     });
   </script>
 </body>
