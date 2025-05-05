@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -43,21 +42,24 @@
     <p>請依照您的需求與偏好填寫以下問題，我們將提供初步的方案建議。</p>
     <form id="recommendationForm"></form>
     <button id="showRecommendationBtn" class="quiz-button" type="button">看推薦方案</button>
+
     <div id="results">
       <h3>初步推薦方案：</h3>
       <div id="recommendationText"></div>
       <p>這是根據您填答結果的初步建議，報價與設計仍需進一步溝通。</p>
       <p><a href="https://lin.ee/k3pmRmV" class="quiz-button" target="_blank">→ 立即與 LINE 客服聯繫</a></p>
     </div>
+
     <div id="contactInfoSection" class="contact-info">
       <h2>留下您的聯絡資訊（選填）</h2>
       <p>若您希望專人聯繫並提供詳細報價，請填寫以下資訊。</p>
-      <label for="contactName">姓名：</label><input type="text" id="contactName">
-      <label for="contactTel">電話：</label><input type="tel" id="contactTel">
-      <label for="contactEmail">Email：</label><input type="email" id="contactEmail">
+      <label for="contactName">姓名：</label><input type="text" id="contactName" />
+      <label for="contactTel">電話：</label><input type="tel" id="contactTel" />
+      <label for="contactEmail">Email：</label><input type="email" id="contactEmail" />
       <button id="submitContactBtn" class="submit-button" type="button">送出聯絡資訊</button>
       <div id="submissionStatus"></div>
     </div>
+
     <div class="footer">
       <p><strong>衣潮工廠團體服飾</strong></p>
       <p>團體服飾 | 客製禮品 | 周邊商品 | 帆布提袋</p>
@@ -67,65 +69,54 @@
       <p><a href="https://lin.ee/k3pmRmV" target="_blank">LINE 聯繫</a> | <a href="https://www.trendyfactory.com.tw" target="_blank">官網</a></p>
     </div>
   </div>
+
   <script>
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw9MH7TVUcr_o_imAVgqRGnD1dUK1aXKucCnIruvd0HCCskHoqolamZWXb4z56-rZbBuA/exec';
 
     const questions = [
-      {
-        name: 'q_purpose',
-        title: '1. 這批團體服主要使用在什麼場合或用途？',
-        tip: '（可根據場域需求選擇最貼近的類型）',
+      { name: 'q_purpose', title: '1. 這批團體服主要使用在什麼場合或用途？', tip: '（可根據場域需求選擇最貼近的類型）',
         options: [
-          {value:'sporty',   text:'A. 運動賽事、戶外活動、流汗較多的場合'},
+          {value:'sporty', text:'A. 運動賽事、戶外活動、流汗較多的場合'},
           {value:'business', text:'B. 公司日常穿著、展覽活動、簡單商務場合'},
-          {value:'casual',   text:'C. 學校班級/社團活動、畢業紀念、休閒聚會'},
-          {value:'trendy',   text:'D. 品牌推廣、文創商品、特殊節日紀念'},
-          {value:'work',     text:'E. 工作需求 (需耐磨、多口袋等)'},
-          {value:'other',    text:'F. 其他 / 不確定'}
+          {value:'casual', text:'C. 學校班級/社團活動、畢業紀念、休閒聚會'},
+          {value:'trendy', text:'D. 品牌推廣、文創商品、特殊節日紀念'},
+          {value:'work', text:'E. 工作需求 (需耐磨、多口袋等)'},
+          {value:'other', text:'F. 其他 / 不確定'}
         ]
       },
-      {
-        name: 'q_material',
-        title: '2. 您對服裝的材質或穿著感有什麼偏好？',
-        tip: '（可參考常穿衣物的手感）',
+      { name: 'q_material', title: '2. 您對服裝的材質或穿著感有什麼偏好？', tip: '（可參考常穿衣物的手感）',
         options: [
-          {value:'wicking',  text:'A. 吸濕排汗、透氣快乾 (適合運動)'},
-          {value:'cotton',   text:'B. 舒適柔軟、親膚透氣 (常見棉質T恤感)'},
-          {value:'stiff',    text:'C. 材質挺拔、不易皺 (Polo/襯衫)'},
-          {value:'warm',     text:'D. 保暖、有厚實感 (秋冬服飾)'},
-          {value:'durable',  text:'E. 耐磨、耐髒、具功能性 (工作服)'},
-          {value:'other',    text:'F. 其他 / 需要建議'}
+          {value:'wicking', text:'A. 吸濕排汗、透氣快乾 (適合運動)'},
+          {value:'cotton', text:'B. 舒適柔軟、親膚透氣 (常見棉質T恤感)'},
+          {value:'stiff', text:'C. 材質挺拔、不易皺 (Polo/襯衫)'},
+          {value:'warm', text:'D. 保暖、有厚實感 (秋冬服飾)'},
+          {value:'durable', text:'E. 耐磨、耐髒、具功能性 (工作服)'},
+          {value:'other', text:'F. 其他 / 需要建議'}
         ]
       },
-      {
-        name: 'q_quantity',
-        title: '3. 預計訂購的數量大概是多少？',
+      { name: 'q_quantity', title: '3. 預計訂購的數量大概是多少？',
         options: [
-          {value:'low',     text:'A. 少量 (20-50 件)'},
-          {value:'medium',  text:'B. 中量 (51-200 件)'},
-          {value:'high',    text:'C. 大量 (200 件以上)'},
+          {value:'low', text:'A. 少量 (20-50 件)'},
+          {value:'medium', text:'B. 中量 (51-200 件)'},
+          {value:'high', text:'C. 大量 (200 件以上)'},
           {value:'unknown', text:'D. 不確定'}
         ]
       },
-      {
-        name: 'q_design',
-        title: '4. 您對圖案/Logo 有什麼想法？',
+      { name: 'q_design', title: '4. 您對圖案/Logo 有什麼想法？',
         options: [
-          {value:'simple',      text:'A. 簡單的文字或單色/雙色 Logo'},
-          {value:'complex',     text:'B. 較複雜、顏色較多的彩色圖案 (非漸層)'},
-          {value:'photo',       text:'C. 包含照片或漸層的複雜彩色圖案'},
-          {value:'embroidery',  text:'D. 立體刺繡質感'},
+          {value:'simple', text:'A. 簡單的文字或單色/雙色 Logo'},
+          {value:'complex', text:'B. 較複雜、顏色較多的彩色圖案 (非漸層)'},
+          {value:'photo', text:'C. 包含照片或漸層的複雜彩色圖案'},
+          {value:'embroidery', text:'D. 立體刺繡質感'},
           {value:'need_design', text:'E. 無想法，需要設計協助'},
-          {value:'other',       text:'F. 不確定'}
+          {value:'other', text:'F. 不確定'}
         ]
       },
-      {
-        name: 'q_budget',
-        title: '5. 每件預算範圍？',
+      { name: 'q_budget', title: '5. 每件預算範圍？',
         options: [
-          {value:'low',     text:'A. 經濟實惠（300 元以下）'},
-          {value:'medium',  text:'B. 中等預算（300-600 元）'},
-          {value:'high',    text:'C. 預算較高（600 元以上）'},
+          {value:'low', text:'A. 經濟實惠（300 元以下）'},
+          {value:'medium', text:'B. 中等預算（300-600 元）'},
+          {value:'high', text:'C. 預算較高（600 元以上）'},
           {value:'unknown', text:'D. 不確定'}
         ]
       }
@@ -224,6 +215,7 @@
       try {
         const res = await fetch(APPS_SCRIPT_URL, {
           method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
         const data = await res.json();
