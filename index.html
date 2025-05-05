@@ -1,253 +1,184 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>團體服推薦問卷｜衣潮工廠</title>
-  <style>
-    body { font-family:'Arial','Microsoft JhengHei',sans-serif; line-height:1.6; margin:0; padding:20px; background:#f4f4f4; color:#333; }
-    .container { max-width:700px; margin:20px auto; background:#fff; padding:30px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
-    h1,h2 { text-align:center; color:#333; }
-    fieldset { border:none; margin-bottom:25px; padding:15px; background:#f9f9f9; border-left:4px solid #007bff; border-radius:4px; }
-    legend { font-weight:bold; margin-bottom:10px; }
-    .tip { font-size:13px; color:#666; margin-top:-10px; margin-bottom:10px; }
-    label { display:block; margin-bottom:8px; cursor:pointer; }
-    input[type="radio"] { margin-right:8px; }
-    .quiz-button, .submit-button {
-      display:block; width:100%; padding:12px; font-size:18px; color:#fff;
-      border:none; border-radius:5px; cursor:pointer; transition:background-color .3s ease; margin-top:20px;
-    }
-    .quiz-button { background:#28a745; }
-    .quiz-button:hover { background:#218838; }
-    .submit-button { background:#007bff; }
-    .submit-button:hover { background:#0056b3; }
-    #results, .contact-info { display:none; margin-top:30px; padding:20px; background:#e9ecef; border-radius:8px; }
-    #results { border:1px dashed #007bff; }
-    #results h3 { margin-top:0; color:#0056b3; }
-    .contact-info label { font-weight:bold; margin-top:10px; }
-    .contact-info input {
-      width:calc(100% - 22px); padding:10px; margin-bottom:15px;
-      border:1px solid #ccc; border-radius:4px;
-    }
-    #submissionStatus { margin-top:15px; text-align:center; font-weight:bold; color:green; }
-    #submissionStatus.error { color:red; }
-    .footer { margin-top:40px; padding-top:20px; border-top:1px solid #ddd; text-align:center; font-size:14px; color:#555; }
-    .footer a { color:#007bff; text-decoration:none; }
-    .footer a:hover { text-decoration:underline; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>團體服推薦問卷｜衣潮工廠</title>
+  <style>
+    body { font-family:'Arial','Microsoft JhengHei',sans-serif; line-height:1.6; margin:0; padding:20px; background:#f4f4f4; color:#333; }
+    .container { max-width:700px; margin:20px auto; background:#fff; padding:30px; border-radius:8px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+    h1,h2 { text-align:center; color:#333; }
+    fieldset { border:none; margin-bottom:25px; padding:15px; background:#f9f9f9; border-left:4px solid #007bff; border-radius:4px; }
+    legend { font-weight:bold; margin-bottom:10px; }
+    .tip { font-size:13px; color:#666; margin-top:-10px; margin-bottom:10px; }
+    label { display:block; margin-bottom:8px; cursor:pointer; }
+    input[type="radio"] { margin-right:8px; }
+    .quiz-button, .submit-button {
+      display:block; width:100%; padding:12px; font-size:18px; color:#fff;
+      border:none; border-radius:5px; cursor:pointer; transition:background-color .3s ease; margin-top:20px;
+    }
+    .quiz-button { background:#28a745; }
+    .quiz-button:hover { background:#218838; }
+    .submit-button { background:#007bff; }
+    .submit-button:hover { background:#0056b3; }
+    #results { display:none; margin-top:30px; padding:20px; background:#e9ecef; border:1px dashed #007bff; border-radius:8px; }
+    #results h3 { margin-top:0; color:#0056b3; }
+    .footer { margin-top:40px; padding-top:20px; border-top:1px solid #ddd; text-align:center; font-size:14px; color:#555; }
+    .footer a { color:#007bff; text-decoration:none; }
+    .footer a:hover { text-decoration:underline; }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>團體服客製化推薦問卷</h1>
-    <p>請依照您的需求與偏好填寫以下問題，我們將提供初步的方案建議。</p>
-    <form id="recommendationForm"></form>
-    <button id="showRecommendationBtn" class="quiz-button" type="button">看推薦方案</button>
+  <div class="container">
+    <h1>團體服客製化推薦問卷</h1>
+    <p>請依照您的需求與偏好填寫以下問題，我們將提供初步的方案建議。</p>
+    <form id="recommendationForm"></form>
+    <button id="showRecommendationBtn" class="quiz-button" type="button">看推薦方案</button>
 
-    <div id="results">
-      <h3>初步推薦方案：</h3>
-      <div id="recommendationText"></div>
-      <p>這是根據您填答結果的初步建議，報價與設計仍需進一步溝通。</p>
-      <p><a href="https://lin.ee/k3pmRmV" class="quiz-button" target="_blank">→ 立即與 LINE 客服聯繫</a></p>
-    </div>
+    <div id="results">
+      <h3>初步推薦方案：</h3>
+      <div id="recommendationText"></div>
+      <button id="copyBtn" class="quiz-button" type="button">📋 複製建議內容</button>
+      <p id="copyStatus" style="text-align:center; font-size:14px; color:green; display:none;">✅ 已複製建議內容</p>
+      <p>這是根據您填答結果的初步建議，報價與設計仍需進一步溝通。</p>
+      <p><a href="https://lin.ee/k3pmRmV" class="quiz-button" target="_blank">→ 立即與 LINE 客服聯繫</a></p>
+    </div>
 
-    <div id="contactInfoSection" class="contact-info">
-      <h2>留下您的聯絡資訊（選填）</h2>
-      <p>若您希望專人聯繫並提供詳細報價，請填寫以下資訊。</p>
-      <label for="contactName">姓名：</label><input type="text" id="contactName">
-      <label for="contactTel">電話：</label><input type="tel" id="contactTel">
-      <label for="contactEmail">Email：</label><input type="email" id="contactEmail">
-      <button id="submitContactBtn" class="submit-button" type="button">送出聯絡資訊</button>
-      <div id="submissionStatus"></div>
-    </div>
+    <div class="footer">
+      <p><strong>衣潮工廠團體服飾</strong></p>
+      <p>團體服飾 | 客製禮品 | 周邊商品 | 帆布提袋</p>
+      <p>電話：07-3509503</p>
+      <p>門市時間：週一至週五 11:00-19:00（假日休息）</p>
+      <p>地址：高雄市三民區九如二路681號</p>
+      <p><a href="https://lin.ee/k3pmRmV" target="_blank">LINE 聯繫</a> | <a href="https://www.trendyfactory.com.tw" target="_blank">官網</a></p>
+    </div>
+  </div>
 
-    <div class="footer">
-      <p><strong>衣潮工廠團體服飾</strong></p>
-      <p>團體服飾 | 客製禮品 | 周邊商品 | 帆布提袋</p>
-      <p>電話：07-3509503</p>
-      <p>門市時間：週一至週五 11:00-19:00（假日休息）</p>
-      <p>地址：高雄市三民區九如二路681號</p>
-      <p><a href="https://lin.ee/k3pmRmV" target="_blank">LINE 聯繫</a> | <a href="https://www.trendyfactory.com.tw" target="_blank">官網</a></p>
-    </div>
-  </div>
+  <script>
+    const questions = [
+      {
+        name: 'q_purpose',
+        title: '1. 這批團體服主要使用在什麼場合或用途？',
+        options: [
+          {value:'sporty', text:'A. 運動賽事、戶外活動、流汗較多的場合'},
+          {value:'business', text:'B. 公司日常穿著、展覽活動、簡單商務場合'},
+          {value:'casual', text:'C. 學校班級/社團活動、畢業紀念、休閒聚會'},
+          {value:'trendy', text:'D. 品牌推廣、文創商品、特殊節日紀念'},
+          {value:'work', text:'E. 工作需求 (需耐磨、多口袋等)'},
+          {value:'other', text:'F. 其他 / 不確定'}
+        ]
+      },
+      {
+        name: 'q_material',
+        title: '2. 您對服裝的材質或穿著感有什麼偏好？',
+        options: [
+          {value:'wicking', text:'A. 吸濕排汗、透氣快乾 (適合運動)'},
+          {value:'cotton', text:'B. 舒適柔軟、親膚透氣 (常見棉質T恤感)'},
+          {value:'stiff', text:'C. 材質挺拔、不易皺 (Polo/襯衫)'},
+          {value:'warm', text:'D. 保暖、有厚實感 (秋冬服飾)'},
+          {value:'durable', text:'E. 耐磨、耐髒、具功能性 (工作服)'},
+          {value:'other', text:'F. 其他 / 需要建議'}
+        ]
+      },
+      {
+        name: 'q_quantity',
+        title: '3. 預計訂購的數量大概是多少？',
+        options: [
+          {value:'low', text:'A. 少量 (20-50 件)'},
+          {value:'medium', text:'B. 中量 (51-200 件)'},
+          {value:'high', text:'C. 大量 (200 件以上)'},
+          {value:'unknown', text:'D. 不確定'}
+        ]
+      },
+      {
+        name: 'q_design',
+        title: '4. 您對圖案/Logo 有什麼想法？',
+        options: [
+          {value:'simple', text:'A. 簡單的文字或單色/雙色 Logo'},
+          {value:'complex', text:'B. 較複雜、顏色較多的彩色圖案 (非漸層)'},
+          {value:'photo', text:'C. 包含照片或漸層的複雜彩色圖案'},
+          {value:'embroidery', text:'D. 立體刺繡質感'},
+          {value:'need_design', text:'E. 無想法，需要設計協助'},
+          {value:'other', text:'F. 不確定'}
+        ]
+      },
+      {
+        name: 'q_budget',
+        title: '5. 每件預算範圍？',
+        options: [
+          {value:'low', text:'A. 經濟實惠（300 元以下）'},
+          {value:'medium', text:'B. 中等預算（300-600 元）'},
+          {value:'high', text:'C. 預算較高（600 元以上）'},
+          {value:'unknown', text:'D. 不確定'}
+        ]
+      }
+    ];
 
-  <script>
-    // << 請將這裡替換為您實際部署 Google Apps Script 網路應用程式後取得的【以 /exec 結尾】的網址 >>
-    // 注意！這裡已經是使用您提供的 /exec 網址了
-    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw9MH7TVUcr_o_imAVgqRGnD1dUK1aXKucCnlruvd0HCCskHoqolamZWXb4z56-rZbBuA/exec';
+    function renderQuestions() {
+      const form = document.getElementById('recommendationForm');
+      form.innerHTML = '';
+      questions.forEach(q => {
+        const field = document.createElement('fieldset');
+        field.innerHTML = `<legend>${q.title}</legend>`;
+        q.options.forEach(opt => {
+          const label = document.createElement('label');
+          label.innerHTML = `<input type="radio" name="${q.name}" value="${opt.value}" required> ${opt.text}`;
+          field.appendChild(label);
+        });
+        form.appendChild(field);
+      });
+    }
 
-    const questions = [
-      {
-        name: 'q_purpose',
-        title: '1. 這批團體服主要使用在什麼場合或用途？',
-        options: [
-          {value:'sporty', text:'A. 運動賽事、戶外活動、流汗較多的場合'},
-          {value:'business', text:'B. 公司日常穿著、展覽活動、簡單商務場合'},
-          {value:'casual', text:'C. 學校班級/社團活動、畢業紀念、休閒聚會'},
-          {value:'trendy', text:'D. 品牌推廣、文創商品、特殊節日紀念'},
-          {value:'work', text:'E. 工作需求 (需耐磨、多口袋等)'},
-          {value:'other', text:'F. 其他 / 不確定'}
-        ]
-      },
-      {
-        name: 'q_material',
-        title: '2. 您對服裝的材質或穿著感有什麼偏好？',
-        options: [
-          {value:'wicking', text:'A. 吸濕排汗、透氣快乾 (適合運動)'},
-          {value:'cotton', text:'B. 舒適柔軟、親膚透氣 (常見棉質T恤感)'},
-          {value:'stiff', text:'C. 材質挺拔、不易皺 (Polo/襯衫)'},
-          {value:'warm', text:'D. 保暖、有厚實感 (秋冬服飾)'},
-          {value:'durable', text:'E. 耐磨、耐髒、具功能性 (工作服)'},
-          {value:'other', text:'F. 其他 / 需要建議'}
-        ]
-      },
-      {
-        name: 'q_quantity',
-        title: '3. 預計訂購的數量大概是多少？',
-        options: [
-          {value:'low', text:'A. 少量 (20-50 件)'},
-          {value:'medium', text:'B. 中量 (51-200 件)'},
-          {value:'high', text:'C. 大量 (200 件以上)'},
-          {value:'unknown', text:'D. 不確定'}
-        ]
-      },
-      {
-        name: 'q_design',
-        title: '4. 您對圖案/Logo 有什麼想法？',
-        options: [
-          {value:'simple', text:'A. 簡單的文字或單色/雙色 Logo'},
-          {value:'complex', text:'B. 較複雜、顏色較多的彩色圖案 (非漸層)'},
-          {value:'photo', text:'C. 包含照片或漸層的複雜彩色圖案'},
-          {value:'embroidery', text:'D. 立體刺繡質感'},
-          {value:'need_design', text:'E. 無想法，需要設計協助'},
-          {value:'other', text:'F. 不確定'}
-        ]
-      },
-      {
-        name: 'q_budget',
-        title: '5. 每件預算範圍？',
-        options: [
-          {value:'low', text:'A. 經濟實惠（300 元以下）'},
-          {value:'medium', text:'B. 中等預算（300-600 元）'},
-          {value:'high', text:'C. 預算較高（600 元以上）'},
-          {value:'unknown', text:'D. 不確定'}
-        ]
-      }
-    ];
+    function getRecommendation(answers) {
+      if (answers.q_purpose === 'sporty' && answers.q_material === 'wicking') {
+        return { scheme: '方案 A：運動活力風', description: '適合高強度運動，快乾透氣', details: ['排汗T恤/背心', '高機能布料', '排汗印刷'] };
+      } else if (answers.q_purpose === 'business' && answers.q_material === 'stiff' && answers.q_budget === 'high') {
+        return { scheme: '方案 C：商務專業風', description: '提升企業形象', details: ['Polo/襯衫', 'CVC混紡', '精緻刺繡'] };
+      } else if (answers.q_budget === 'low') {
+        return { scheme: '方案 D：預算友善方案', description: '控制成本，簡約實用', details: ['基本款Tee/Polo', '單色網版印刷'] };
+      } else if (answers.q_quantity === 'low' && answers.q_design === 'photo') {
+        return { scheme: '方案 E：直噴/數位轉印方案', description: '少量複雜彩圖', details: ['直噴印刷', '數位轉印'] };
+      } else {
+        return { scheme: '方案 F：專人諮詢', description: '需求特殊，將有專人聯繫', details: ['請留下聯絡資訊，我們會盡速回覆'] };
+      }
+    }
 
-    function renderQuestions() {
-      const form = document.getElementById('recommendationForm');
-      form.innerHTML = '';
-      questions.forEach(q => {
-        const field = document.createElement('fieldset');
-        field.innerHTML = `<legend>${q.title}</legend>`;
-        q.options.forEach(opt => {
-          const label = document.createElement('label');
-          label.innerHTML = `<input type="radio" name="${q.name}" value="${opt.value}" required> ${opt.text}`;
-          field.appendChild(label);
-        });
-        form.appendChild(field);
-      });
-    }
+    function recommend() {
+      const answers = {};
+      let allAnswered = true;
+      questions.forEach(q => {
+        const sel = document.querySelector(`input[name="${q.name}"]:checked`);
+        if (sel) answers[q.name] = sel.value;
+        else allAnswered = false;
+      });
+      if (!allAnswered) {
+        alert('請完成所有題目');
+        return;
+      }
 
-    function getRecommendation(answers) {
-      if (answers.q_purpose === 'sporty' && answers.q_material === 'wicking') {
-        return { scheme: '方案 A：運動活力風', description: '適合高強度運動，快乾透氣', details: ['排汗T恤/背心', '高機能布料', '排汗印刷'] };
-      } else if (answers.q_purpose === 'business' && answers.q_material === 'stiff' && answers.q_budget === 'high') {
-        return { scheme: '方案 C：商務專業風', description: '提升企業形象', details: ['Polo/襯衫', 'CVC混紡', '精緻刺繡'] };
-      } else if (answers.q_budget === 'low') {
-        return { scheme: '方案 D：預算友善方案', description: '控制成本，簡約實用', details: ['基本款Tee/Polo', '單色網版印刷'] };
-      } else if (answers.q_quantity === 'low' && answers.q_design === 'photo') {
-        return { scheme: '方案 E：直噴/數位轉印方案', description: '少量複雜彩圖', details: ['直噴印刷', '數位轉印'] };
-      } else {
-        return { scheme: '方案 F：專人諮詢', description: '需求特殊，將有專人聯繫', details: ['請留下聯絡資訊，我們會盡速回覆'] };
-      }
-    }
+      const rec = getRecommendation(answers);
+      if (answers.q_design === 'embroidery') rec.details.unshift('建議工藝：電腦刺繡');
 
-    function recommend() {
-      const answers = {};
-      let allAnswered = true;
-      questions.forEach(q => {
-        const sel = document.querySelector(`input[name="${q.name}"]:checked`);
-        if (sel) answers[q.name] = sel.value;
-        else allAnswered = false;
-      });
-      if (!allAnswered) {
-        alert('請完成所有題目');
-        return;
-      }
+      window.currentRecommendation = rec;
 
-      let rec = getRecommendation(answers);
-      if (answers.q_design === 'embroidery') rec.details.unshift('建議工藝：電腦刺繡');
+      document.getElementById('recommendationText').innerHTML =
+        `<p><strong>${rec.scheme}</strong></p><p>${rec.description}</p><ul>${rec.details.map(d => `<li>${d}</li>`).join('')}</ul>`;
+      document.getElementById('results').style.display = 'block';
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    }
 
-      window.currentRecommendation = rec;
-
-      document.getElementById('recommendationText').innerHTML =
-        `<p><strong>${rec.scheme}</strong></p><p>${rec.description}</p><ul>${rec.details.map(d => `<li>${d}</li>`).join('')}</ul>`;
-      document.getElementById('results').style.display = 'block';
-      document.getElementById('contactInfoSection').style.display = 'block';
-      document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    async function submitContactInfo() {
-      const name = document.getElementById('contactName').value;
-      const tel = document.getElementById('contactTel').value;
-      const email = document.getElementById('contactEmail').value;
-      const status = document.getElementById('submissionStatus');
-
-      if (!name && !tel && !email) {
-        status.textContent = '請至少填寫姓名、電話或 Email';
-        status.className = 'error';
-        return;
-      }
-
-      const answers = {}, answersText = {};
-      questions.forEach(q => {
-        const sel = document.querySelector(`input[name="${q.name}"]:checked`);
-        if (sel) {
-          answers[q.name] = sel.value;
-          answersText[q.name + '_text'] = sel.parentElement.textContent.trim();
-        }
-      });
-
-      const rec = window.currentRecommendation || {};
-
-      const payload = {
-        ...answers,
-        ...answersText,
-        recommendationScheme: rec.scheme || '',
-        recommendationDescription: rec.description || '',
-        contactName: name,
-        contactTel: tel,
-        contactEmail: email
-      };
-
-      status.textContent = '送出中...';
-      status.className = '';
-
-      try {
-        const res = await fetch(APPS_SCRIPT_URL, {
-          method: 'POST',
-          body: JSON.stringify(payload),
-          headers: { 'Content-Type': 'application/json' }
-        });
-        const data = await res.json();
-        if (data.result === 'success') {
-          status.textContent = '送出成功！我們會儘快與您聯繫。';
-          document.getElementById('contactInfoSection').style.display = 'none';
-        } else {
-          throw new Error('伺服器回應錯誤');
-        }
-      } catch (err) {
-        status.textContent = '送出失敗，請稍後再試或直接聯繫我們。';
-        status.className = 'error';
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      renderQuestions();
-      document.getElementById('showRecommendationBtn').addEventListener('click', recommend);
-      document.getElementById('submitContactBtn').addEventListener('click', submitContactInfo);
-    });
-  </script>
+    document.addEventListener('DOMContentLoaded', () => {
+      renderQuestions();
+      document.getElementById('showRecommendationBtn').addEventListener('click', recommend);
+      document.getElementById('copyBtn').addEventListener('click', () => {
+        const content = document.getElementById('recommendationText').innerText;
+        navigator.clipboard.writeText(content).then(() => {
+          const status = document.getElementById('copyStatus');
+          status.style.display = 'block';
+          setTimeout(() => status.style.display = 'none', 2000);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
